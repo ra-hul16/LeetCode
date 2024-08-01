@@ -28,3 +28,36 @@ public:
         
     }
 };
+
+//Alternate Solution
+
+class Solution {
+public:
+
+    int xorr(vector<int>& nums){
+        int n=nums.size();
+        int ans=0;
+        for(int i=0;i<n;i++){
+            ans^=nums[i];
+        }
+        for(int i=0;i<=n;i++){
+            ans^=i;
+        }
+        return ans;
+    }
+
+
+    int missingNumber(vector<int>& nums) {
+        // int size=nums.size();
+        // int sum=0;
+        // for(int index=0;index<size;index++){
+        //     sum+=nums[index];
+        // }
+
+        // int actualsum=(size*(size+1))/2;
+        // int value=actualsum-sum;
+        // return value;
+        return xorr(nums);
+        
+    }
+};
