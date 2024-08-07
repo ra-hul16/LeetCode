@@ -1,0 +1,22 @@
+//Explanation in pg32 of notebook
+class Solution {
+public:
+    int peakIndexInMountainArray(vector<int>& arr) {
+        int n=arr.size();
+        int s=0; //start
+        int e=n-1; //end
+        int mid= s+ (e-s)/2;
+        while(s<e){   //s<=e will give error as time exceeded
+            if(arr[mid]<arr[mid+1]){  //This is in A line, so peak exists in right
+                s=mid+1;  
+            }
+            else{              //either in Peak or B line, so when we assign e=mid,we don't lose peak and also come out of B line
+                e= mid;
+            }
+            mid= s+ (e-s)/2;
+
+        }
+        return s;  
+        
+    }
+};
