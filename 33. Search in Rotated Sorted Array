@@ -1,0 +1,62 @@
+class Solution {
+public:
+
+    int FindPivotElement(vector<int>& arr){
+        int n=arr.size();
+        int s=0;
+        int e=n-1;
+        int mid=s+(e-s)/2;
+        while(s<=e){
+            //single element
+            if(s==e){
+                return s;
+            }
+            else if(mid+1<=n && arr[mid]>arr[mid+1]){
+                return mid;
+            }
+            else if(mid-1>=0 && arr[mid]<arr[mid-1]){
+                return mid-1;
+            }
+            else if(arr[s]>arr[mid]){
+                e=mid-1;
+            }
+            else{
+                s=mid+1;
+            }
+            mid=s+(e-s)/2;
+        }
+        return -1;
+    }
+    int binarysearch(vector<int>& arr,int s,int e,int target){
+        int m=s+(e-s)/2;
+        while(s<=e){
+            if(arr[m]==target){
+                return m;
+            }
+            else if(arr[m]>target){
+                e=m-1;
+            }
+            else{
+                s=m+1;
+            }
+            m=s+(e-s)/2;
+        }
+        return -1;
+    }
+
+    int search(vector<int>& nums, int target) {
+        int pivot_index=FindPivotElement(nums);
+        cout<<"Pivot Element is: "<<pivot_index;
+        int n=nums.size();
+        int ans=-1;
+
+        //search in A
+        if(target>=nums[0] && target<=nums[pivot_index]){
+            ans=binarysearch(nums,0,pivot_index,target);
+        }
+        else{
+            ans=binarysearch(nums,pivot_index+1,n-1,target);
+        }
+        return ans;
+    }
+};
